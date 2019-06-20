@@ -85,10 +85,10 @@
         iteration: 0,
         allStatus: [],
         countAllStatus: 0,
-        headersCanada: [ "PI_1.1", "PI_2.1", "PI_2.2", "PI_2.3", "PI_2.4", "PI_2.5", "PI_2.6"],
-        headersCorporate: [ "PI_2.1", "PI_2.2", "PI_2.3", "PI_2.4", "PI_2.5"],
-        AllP: [ "PI_1", "PI_2.1", "PI_2.2", "PI_2.3", "PI_2.4", "PI_2.5", "PI_2.6"],
-        headersForBurnUp: ["Category"],
+        headersCanada: ["PI_1.1", "PI_2.1", "PI_2.2", "PI_2.3", "PI_2.4", "PI_2.5", "PI_2.6"],
+        headersCorporate: ["PI_2.1", "PI_2.2", "PI_2.3", "PI_2.4", "PI_2.5"],
+        AllP: ["PI_1", "PI_2.1", "PI_2.2", "PI_2.3", "PI_2.4", "PI_2.5", "PI_2.6"],
+        headersForBurnUp: [],
         PIheadersCorporate: "",
         isCanada: false,
         isCorporate: false,
@@ -120,17 +120,32 @@
             let current = [];
 
             console.log("instatus")
-            if (count == 5)
-              PI = el
-            if (count == 9) {
+            if (!this.isCanada) {
+              if (count == 8)
+                PI = el
+              if (count == 10) {
+                current = [el, PI]
+                this.allStatus.push(current)
+                count++
+              }
+              else {
+                count++
+              }
+            }
 
-              current = [el, PI]
-              this.allStatus.push(current)
-              count++
-            }
             else {
-              count++
+
+              if (count == 5)
+                PI = el
+              if (count == 9) {
+                current = [el, PI]
+                this.allStatus.push(current)
+                count++
+              }
             }
+
+            count++
+
 
 
 
@@ -140,67 +155,67 @@
         });
         this.countAllStatus = this.allStatus.length
         this.isFile = true;
-        if (!self.isCanada) {
-          this.firstCl.forEach(element => {
-            let p11 = 0;
-            let p21 = 0;
-            let p22 = 0;
-            let p23 = 0;
-            let p24 = 0;
-            let p25 = 0;
-            let p26 = 0;
+        self = this;
+        let countH = 0
+
+        this.firstCl.forEach(element => {
+          let json = [element];
+
+          this.AllData.push(json)
+          self.headersForBurnUp.forEach(el => {
+            let p = 0
             if (element == "Refined Scope") {
-              p11 = this.countAllStatus;
-              p21 = this.countAllStatus;
-              p22 = this.countAllStatus;
-              p23 = this.countAllStatus;
-              p24 = this.countAllStatus;
-              p25 = this.countAllStatus;
-              p26 = this.countAllStatus;
+              let p = this.countAllStatus
+              this.AllData[countH].push(p);
+              
             }
-            let json = [];
-
-            json = [element, p11, p21, p22, p23, p24, p25, p26];
-            this.AllData.push(json);
-
-          });
-        }
-        else {
-          this.firstCl.forEach(element => {
-
-            let p21 = 0;
-            let p22 = 0;
-            let p23 = 0;
-            let p24 = 0;
-            let p25 = 0;
-
-            if (element == "Refined Scope") {
-              p11 = this.countAllStatus;
-              p21 = this.countAllStatus;
-              p22 = this.countAllStatus;
-              p23 = this.countAllStatus;
-              p24 = this.countAllStatus;
-              p25 = this.countAllStatus;
-              p26 = this.countAllStatus;
+            else
+            {
+              
+              this.AllData[countH].push(p);
             }
-            let json = [];
-
-            json = [element, p21, p22, p23, p24, p25];
-            this.AllData.push(json);
           })
-        }
+          countH++
 
-        console.log(this.newData);
-        console.log(this.AllData[0].p11);
+        });
+
+        // else {
+        //   this.firstCl.forEach(element => {
+
+        //     let p21 = 0;
+        //     let p22 = 0;
+        //     let p23 = 0;
+        //     let p24 = 0;
+        //     let p25 = 0;
+
+        //     if (element == "Refined Scope") {
+        //       p11 = this.countAllStatus;
+        //       p21 = this.countAllStatus;
+        //       p22 = this.countAllStatus;
+        //       p23 = this.countAllStatus;
+        //       p24 = this.countAllStatus;
+        //       p25 = this.countAllStatus;
+        //       p26 = this.countAllStatus;
+        //     }
+        //     let json = [];
+
+        //     json = [element, p21, p22, p23, p24, p25];
+        //     this.AllData.push(json);
+        //   })
+        // }
+
+        // console.log(this.newData);
+        // console.log(this.AllData[0].p11);
       },
       getBurnout() {
         self = this
-        if (!self.isCanada) {
-          self.headersForBurnUp = self.headersCorporate
-        }
-        else {
-          self.headersForBurnUp = self.headersCanada
-        }
+        self.headersForBurnUp.unshift("Category");
+        // if (!self.isCanada) {
+        //   self.headersForBurnUp = self.headersCorporate
+        // }
+        // else {
+        //   self.headersForBurnUp = self.headersCanada
+        // }
         this.isFired = true;
         if (!self.isCanada) {
           self.allStatus.forEach(element => {
