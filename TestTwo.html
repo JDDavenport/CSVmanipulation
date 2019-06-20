@@ -42,10 +42,18 @@
                 <td>
                     {{rowData[7]}}
                 </td>
-                
+
             </tr>
         </table>
     </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/6.2.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#reserved-urls -->
+
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
 </body>
 
 
@@ -99,23 +107,23 @@
                     let count = 0;
                     let PI = "";
                     element.forEach(el => {
-                        
-                        let current=[];
-                        
-                            console.log("instatus")
-                            if (count == 5)
-                                PI = el
-                            if (count == 9) {
-                                
-                                current = [el, PI]
-                                this.allStatus.push(current)
-                                count++
-                            }
-                            else{
-                                count++
-                            }
-                            
-                        
+
+                        let current = [];
+
+                        console.log("instatus")
+                        if (count == 5)
+                            PI = el
+                        if (count == 9) {
+
+                            current = [el, PI]
+                            this.allStatus.push(current)
+                            count++
+                        }
+                        else {
+                            count++
+                        }
+
+
 
                     })
 
@@ -142,9 +150,9 @@
                     }
                     let json = [];
 
-                    json = [ element, p11, p21, p22, p23, p24, p25, p26 ];
+                    json = [element, p11, p21, p22, p23, p24, p25, p26];
                     this.AllData.push(json);
-                    
+
                 });
                 console.log(this.newData);
                 console.log(this.AllData[0].p11);
@@ -159,37 +167,37 @@
                 //     }
 
                 // });
-                    console.log(this.allStatus)
-                    console.log(this.allStatus[1][1])
+                console.log(this.allStatus)
+                console.log(this.allStatus[1][1])
                 self.allStatus.forEach(element => {
                     console.log("in for each loop")
 
                     if (element[1] == "PI_1.1") {
-                            this.AllData[2][1]++
-                            
-                        }
-                        else if (element[1] == "PI_2.1") {
-                            this.AllData[2][2]++
-                        }
-                        else if (element[1] == "PI_2.2") {
-                            this.AllData[2][3]++
-                        }
-                        else if (element[1] == "PI_2.3") {
-                            this.AllData[2][4]++
-                        }
-                        else if (element[1] == "PI_2.4") {
-                            this.AllData[2][5]++
-                        }
-                        else if (element[1] == "PI_2.5") {
-                            this.AllData[2][6]++
-                        }
-                        else if (element[1] == "PI_2.6") {
-                            this.AllData[2][7]++
-                        }
+                        this.AllData[2][1]++
+
+                    }
+                    else if (element[1] == "PI_2.1") {
+                        this.AllData[2][2]++
+                    }
+                    else if (element[1] == "PI_2.2") {
+                        this.AllData[2][3]++
+                    }
+                    else if (element[1] == "PI_2.3") {
+                        this.AllData[2][4]++
+                    }
+                    else if (element[1] == "PI_2.4") {
+                        this.AllData[2][5]++
+                    }
+                    else if (element[1] == "PI_2.5") {
+                        this.AllData[2][6]++
+                    }
+                    else if (element[1] == "PI_2.6") {
+                        this.AllData[2][7]++
+                    }
                     if ((element[0] == "Closed") || (element[0] == "Done") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete")) {
                         if (element[1] == "PI_1.1") {
                             this.AllData[3][1]++
-                            
+
                         }
                         if (element[1] == "PI_2.1") {
                             this.AllData[3][2]++
@@ -210,10 +218,10 @@
                             this.AllData[3][7]++
                         }
                     }
-                    if ((element[0] == "Closed") || (element[0] =="Done") || (element[0] =="Ready for Deployment") || (element[0] =="Sprint Complete") || (element[0] =="QA Testing") || (element[0] =="Business Validation")) {
+                    if ((element[0] == "Closed") || (element[0] == "Done") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete") || (element[0] == "QA Testing") || (element[0] == "Business Validation")) {
                         if (element[1] == "PI_1.1") {
                             this.AllData[4][1]++
-                            
+
                         }
                         if (element[1] == "PI_2.1") {
                             this.AllData[4][2]++
