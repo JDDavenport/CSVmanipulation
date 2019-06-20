@@ -46,6 +46,14 @@
             </tr>
         </table>
     </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/6.2.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#reserved-urls -->
+
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
 </body>
 
 
@@ -101,6 +109,7 @@
                     element.forEach(el => {
 
                         let current = [];
+<<<<<<< HEAD
                         if (!this.isCanada) {
                             if (count == 8)
                                 PI = el
@@ -130,6 +139,21 @@
                         }
                         
                         console.log("instatus")
+=======
+
+                        console.log("instatus")
+                        if (count == 5)
+                            PI = el
+                        if (count == 9) {
+
+                            current = [el, PI]
+                            this.allStatus.push(current)
+                            count++
+                        }
+                        else {
+                            count++
+                        }
+>>>>>>> 4278a2b3eab6a289a8c9b3502f508f4c7394b934
 
 
 
