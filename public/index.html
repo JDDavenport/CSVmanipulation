@@ -126,7 +126,7 @@
           let PI = "";
           let st = "";
           let s = "";
-          if (one > 2) {
+          if (one > 3) {
 
 
             element.forEach(el => {
@@ -160,9 +160,6 @@
                 if (count == 9) {
                   st = el
 
-                }
-                if (one == 227) {
-                  console.log("broke?")
                 }
                 if (count == 10) {
                   if ((el != "") && (st != null) && (PI != null)) {
@@ -219,6 +216,7 @@
 
           // })
           // })
+          count =0
           self.allStatus.forEach(element => {
             console.log("in for each loop")
 
@@ -252,8 +250,10 @@
               if (element[1] == "PI_2.1") {
                 this.AllData[3][2] += element[2]
               }
-              if (element[1] == "P_2.2") {
+              if (element[1] == "PI_2.2") {
                 this.AllData[3][3] += element[2]
+                
+                
               }
               if (element[1] == "PI_2.3") {
                 this.AllData[3][4] += element[2]
