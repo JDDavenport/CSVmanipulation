@@ -1,62 +1,107 @@
 <head>
   <meta charset="utf-8" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.0.0/papaparse.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://unpkg.com/vuex"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+  <!-- <script src="https://unpkg.com/vuex"></script> -->
+  <!-- Load required Bootstrap and BootstrapVue CSS -->
+  <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+  <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
+
+  <!-- Load polyfills to support older browsers -->
+  <!-- <script src="//polyfill.io/v3/polyfill.min.js?features=es2015%2CMutationObserver" crossorigin="anonymous"></script> -->
+
+  <!-- Load Vue followed by BootstrapVue -->
+  <script src="https://unpkg.com/vue@latest/dist/vue.min.js"></script>
+  <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+
 </head>
 
 
 <body>
   <div id="vapp">
-    <h1>Burn up Generator</h1>
-    <br><br>
-    <div v-if="finished">
-     
-    <label>Canada: </label><input type="checkbox" v-model="isCanada" v-on:change="changeP('c')">
-    <label>Corporate: </label><input type="checkbox" v-model="isCorporate" v-on:change="changeP('ca')">
-    <div v-if="(isCanada || isCorporate)" v-for="sprint in AllP">
-      <label>{{sprint}} </label><input type="checkbox" v-model="headersForBurnUp" v-bind:value="sprint">
-    </div>
-    <br><br>
-    <input type="file" id="file" ref="myFiles" class="custom-file-input" @change="previewFiles" multiple
-      v-if="isCanada || isCorporate">
-    <button id="fireburnout" v-on:click="getBurnout()" v-if="isFile && (isCanada || isCorporate)">Get
-      burnout</button>
-    </div>
-    <button id="fireburnoutRefresh" v-on:click="changeF()" v-if="!finished">New burnout</button>
+    <div class="card">
+      <div class="card-body">
+        <div class="offset-md-4 col-md-4">
 
-    <table v-if="isFired">
-      <tr>
-        <th v-for="(header, index) in headersForBurnUp">
-          {{header}}</th>
-      </tr>
-      <tr v-for="rowData in AllData">
-        <td>{{rowData[0]}}</td>
-        <td v-if="p1">
-          {{rowData[1]}}
-        </td>
-        <td v-if="p21">
-          {{!isCanada ? rowData[1] : rowData[2]}}
-        </td>
-        <td v-if="p22">
-          {{!isCanada ? rowData[2] : rowData[3]}}
-        </td>
-        <td v-if="p23">
-          {{!isCanada ? rowData[3] : rowData[4]}}
-        </td>
-        <td v-if="p24">
-          {{!isCanada ? rowData[4] : rowData[5]}}
-        </td>
-        <td v-if="p25">
-          {{!isCanada ? rowData[5] : rowData[6]}}
-        </td>
-        <td v-if="p26">
-          {{rowData[7]}}
-        </td>
 
-      </tr>
-    </table>
+          <h1 class="text-center">Burn up Generator</h1>
+        </div>
+        <br><br>
+        <div v-if="finished">
+          <div class="card offset-md-4 col-md-4" style="background-color:#F5F5F5;">
+            <div class="card-body">
+              <div class="text-center">
+                <label>Canada:&nbsp </label><input type="checkbox" v-model="isCanada" v-on:change="changeP('c')">
+                <label>Corporate:&nbsp </label><input type="checkbox" v-model="isCorporate" v-on:change="changeP('ca')">
+                <div v-if="(isCanada || isCorporate)" v-for="sprint in AllP">
+                  <label>{{sprint}} </label><input type="checkbox" v-model="headersForBurnUp" v-bind:value="sprint">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div class="input-group offset-md-3 col-md-6" v-if="isCanada || isCorporate">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="fileAddon1">Upload</span>
+            </div>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="file" ref="myFiles" @change="previewFiles" multiple
+                v-if="isCanada || isCorporate">
+              <label class="custom-file-label" for="file">{{files.name}}</label>
+            </div>
+          </div>
+          <!-- <label v-if="isCanada || isCorporate">Upload File: <input style="background-color: grey; color: black;"
+              type="file" id="file" ref="myFiles" class="custom-file-input" @change="previewFiles" multiple
+              v-if="isCanada || isCorporate"> </label> -->
+          <br><button id="fireburnout" class=" offset-md-5 col-md-2 btn btn-primary" v-on:click="getBurnout()"
+            v-if="isFile && (isCanada || isCorporate)">Get
+            burnout</button><br>
+        </div>
+        <div class="card card offset-md-2 col-md-8" v-if="!finished" style="background-color:#F5F5F5">
+          <div class="card-body" >
+            
+
+            <table class="table " v-if="isFired" >
+                <thead class="thead-dark">
+              <tr>
+                <th v-for="(header, index) in headersForBurnUp">
+                  {{header}}</th>
+              </tr>
+              </thead>
+              <tr v-for="rowData in AllData">
+                <td scope="col">{{rowData[0]}}</td>
+                <td v-if="p1">
+                  {{rowData[1]}}
+                </td>
+                <td v-if="p21">
+                  {{!isCanada ? rowData[1] : rowData[2]}}
+                </td>
+                <td v-if="p22">
+                  {{!isCanada ? rowData[2] : rowData[3]}}
+                </td>
+                <td v-if="p23">
+                  {{!isCanada ? rowData[3] : rowData[4]}}
+                </td>
+                <td v-if="p24">
+                  {{!isCanada ? rowData[4] : rowData[5]}}
+                </td>
+                <td v-if="p25">
+                  {{!isCanada ? rowData[5] : rowData[6]}}
+                </td>
+                <td v-if="p26">
+                  {{rowData[7]}}
+                </td>
+
+              </tr>
+            </table>
+            <button id="fireburnoutRefresh" v-on:click="changeF()" v-if="!finished" class="btn btn-danger">New
+                burnout</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="/__/firebase/6.2.0/firebase-app.js"></script>
 
@@ -206,11 +251,11 @@
 
         });
       },
-      changeP(cOca){
+      changeP(cOca) {
         self = this
         console.log(cOca)
         console.log(this.isCanada)
-        
+
 
         // if((cOca == 'c'))
         // {
@@ -219,26 +264,26 @@
         // else
         // {
         //   self.AllP = self.headersCorporate
-          
+
         // }
-        if (!self.isCanada){
+        if (!self.isCanada) {
           self.AllP = self.headersCorporate
-        console.log("changed p to c")
+          console.log("changed p to c")
 
         }
-        else{
+        else {
           self.AllP = self.headersCanada
-        console.log("changed p to ca")
+          console.log("changed p to ca")
 
         }
       },
-      changeF(){
+      changeF() {
         // self = this
         // self.finished = true;
         // self.isFired = false;
         console.log("in change F")
         location.reload()
-        
+
       },
       getBurnout() {
         self = this
@@ -256,7 +301,7 @@
 
           // })
           // })
-          count =0
+          count = 0
           self.allStatus.forEach(element => {
             console.log("in for each loop")
 
@@ -292,8 +337,8 @@
               }
               else if (element[1] == "PI_2.2") {
                 this.AllData[2][3] += element[2]
-                
-                
+
+
               }
               else if (element[1] == "PI_2.3") {
                 this.AllData[2][4] += element[2]
@@ -374,7 +419,7 @@
             }
 
             if ((element[0] == "Done") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete")) {
-//(element[0] == "Closed") || 
+              //(element[0] == "Closed") || 
               if (element[1] == "PI_2.1") {
                 this.AllData[2][1] += element[2]
               }
@@ -451,10 +496,10 @@
         self.finished = false;
         self.isFile = false;
 
-        
+
 
       },
-      beforeMount: function(){
+      beforeMount: function () {
 
       }
     }
