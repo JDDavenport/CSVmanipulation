@@ -238,7 +238,7 @@
           let project = "";
           let st = "";
           let s = "";
-          if (one == 3 || (this.isTax && one == 0)) {
+          if (one == 3) {
             icount = 0;
             element.forEach(el => {
               this.headers += el
@@ -275,7 +275,7 @@
                 }
                 else if (count == this.storyPointIndex) {
                   if (el != "") {
-                    s = parseInt(el)
+                    s = parseFloat(el)
                     this.AllStorypointsSum += s
                   }
                   if ((s != "") && (st != null) && (PI != null)) {
@@ -304,7 +304,7 @@
                 }
                 else if (count == this.storyPointIndex) {
                   if (el != "") {
-                    s = parseInt(el)
+                    s = parseFloat(el)
                     this.AllStorypointsSum += s
                   }
                   if ((s != "") && (st != "") && (PI != "")) {
@@ -341,7 +341,7 @@
                   }
                   else if (count == this.storyPointIndex) {
                     if (el != "") {
-                      s = parseInt(el)
+                      s = parseFloat(el)
                       this.AllStorypointsSum += s
                     }
 
