@@ -1,6 +1,6 @@
 Burn up generator app
 
-This app is used to generate burnup charts for up to 5 increments.IT DOES NOT WORK ON INTERNET EXPLORER :)
+This app is used to generate burnup charts for up to 5 increments. IT DOES NOT WORK ON INTERNET EXPLORER :)
 
 HOW TO:
 1. Download Excel file from Jira
