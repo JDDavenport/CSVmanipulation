@@ -38,8 +38,8 @@
                     <option value="4">Increment 4</option>
                     <option value="5">Increment 5</option>
                   </select>
-                  <button id="incrementSelected" v-on:click="changeSprint()">Continue</button>
-                </div>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp<button class="btn btn-primary" id="incrementSelected" v-on:click="changeSprint()" v-if="isContinueClicked">Continue</button>
+                </div><br>
                 <div v-if="isSprintSelected">
                   <label>Canada:&nbsp </label><input type="checkbox" v-model="isCanada" v-on:change="changeP('c')">
                   <label>Corporate:&nbsp </label><input type="checkbox" v-model="isCorporate"
@@ -258,7 +258,8 @@
         isStarted: true,
         p12: false,
         p13: false,
-        p14: false
+        p14: false,
+        isContinueClicked: true
       }
     },
     methods: {
@@ -285,7 +286,7 @@
           this.headersCorporate = ["PI_" + this.sprintIncrement + ".1", "PI_" + this.sprintIncrement + ".2", "PI_" + this.sprintIncrement + ".3", "PI_" + this.sprintIncrement + ".4", "PI_" + this.sprintIncrement + ".5"]
         
 
-
+          this.isContinueClicked = false
         //this.AllP = ["PI_1", "PI_"+this.sprintIncrement+".1", "PI_"+this.sprintIncrement+".2", "PI_"+this.sprintIncrement+".3", "PI_"+this.sprintIncrement+".4", "PI_"+this.sprintIncrement+".5", "PI_"+this.sprintIncrement+".6"]
       },
       changeP(cOca) {
