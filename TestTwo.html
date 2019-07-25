@@ -10,8 +10,19 @@
     <div id="vapp">
         <input type="file" id="file" ref="myFiles" class="custom-file-input" @change="previewFiles" multiple>
         <br><br>
-        <label>Canada: </label><input type="checkbox" v-model="isCanada">
-        <label>Corporate: </label><input type="checkbox" v-model="isCorporate">
+        <div v-if="isStarted">
+        <select v-bind="sprintIncrement">
+            <option value="2">Increment 2</option>
+            <option value="3">Increment 3</option>
+            <option value="4">Increment 4</option>
+            <option value="5">Increment 5</option>
+        </select>
+        <button id="incrementSelected" v-on:click="changeSprint()" >Continue</button>
+        </div>
+        <div v-if="isSprintSelected">
+            <label>Canada: </label><input type="checkbox" v-model="isCanada">
+            <label>Corporate: </label><input type="checkbox" v-model="isCorporate">
+        </div>
         <button id="fireburnout" v-on:click="getBurnout()" v-if="isFile && (isCanada || isCorporate)">Get
             burnout</button>
         <table v-if="isFired">
@@ -83,7 +94,10 @@
                 PIheadersCorporate: "",
                 isCanada: false,
                 isCorporate: false,
-                AllData: []
+                AllData: [],
+                sprintIncrement: 2,
+                isSprintSelected: false,
+                isStarted: true
 
             }
         },
@@ -99,6 +113,10 @@
                 return {
                     complete: this.completeFn
                 };
+            },
+            changeSprint() {
+                this.isSprintSelected = true;
+                this.isStarted = true;
             },
             completeFn(results) {
                 this.newData = results.data;
@@ -218,7 +236,7 @@
                             this.AllData[3][7]++
                         }
                     }
-                    if ((element[0] == "Closed") || (element[0] == "Done") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete") || (element[0] == "QA Testing") || (element[0] == "Business Validation")|| (element[0] == "End-to-End Testing")) {
+                    if ((element[0] == "Closed") || (element[0] == "Done") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete") || (element[0] == "QA Testing") || (element[0] == "Business Validation") || (element[0] == "End-to-End Testing")) {
                         if (element[1] == "PI_1.1") {
                             this.AllData[4][1]++
 
