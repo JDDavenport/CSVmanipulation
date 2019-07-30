@@ -38,7 +38,8 @@
                     <option value="4">Increment 4</option>
                     <option value="5">Increment 5</option>
                   </select>
-                  &nbsp&nbsp&nbsp&nbsp&nbsp<button class="btn btn-primary" id="incrementSelected" v-on:click="changeSprint()" v-if="isContinueClicked">Continue</button>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp<button class="btn btn-primary" id="incrementSelected"
+                    v-on:click="changeSprint()" v-if="isContinueClicked">Continue</button>
                 </div><br>
                 <div v-if="isSprintSelected">
                   <label>Canada:&nbsp </label><input type="checkbox" v-model="isCanada" v-on:change="changeP('c')">
@@ -281,29 +282,24 @@
       changeSprint() {
         this.isSprintSelected = true;
         this.isStarted = true;
-        
-          this.headersCanada = ["PI_1", "PI_" + this.sprintIncrement + ".1", "PI_" + this.sprintIncrement + ".2", "PI_" + this.sprintIncrement + ".3", "PI_" + this.sprintIncrement + ".4", "PI_" + this.sprintIncrement + ".5", "PI_" + this.sprintIncrement + ".6"]
-          this.headersCorporate = ["PI_" + this.sprintIncrement + ".1", "PI_" + this.sprintIncrement + ".2", "PI_" + this.sprintIncrement + ".3", "PI_" + this.sprintIncrement + ".4", "PI_" + this.sprintIncrement + ".5"]
-        
 
-          this.isContinueClicked = false
+        this.headersCanada = [ "PI_" + this.sprintIncrement, "PI_" + this.sprintIncrement + ".1", "PI_" + this.sprintIncrement + ".2", "PI_" + this.sprintIncrement + ".3", "PI_" + this.sprintIncrement + ".4", "PI_" + this.sprintIncrement + ".5", "PI_" + this.sprintIncrement + ".6", "PI_" + this.sprintIncrement + ".7"]
+        this.headersCorporate = ["PI_" + this.sprintIncrement,"PI_" + this.sprintIncrement + ".1", "PI_" + this.sprintIncrement + ".2", "PI_" + this.sprintIncrement + ".3", "PI_" + this.sprintIncrement + ".4", "PI_" + this.sprintIncrement + ".5", "PI_" + this.sprintIncrement + ".6", "PI_" + this.sprintIncrement + ".7"]
+
+
+        this.isContinueClicked = false
         //this.AllP = ["PI_1", "PI_"+this.sprintIncrement+".1", "PI_"+this.sprintIncrement+".2", "PI_"+this.sprintIncrement+".3", "PI_"+this.sprintIncrement+".4", "PI_"+this.sprintIncrement+".5", "PI_"+this.sprintIncrement+".6"]
       },
       changeP(cOca) {
         self = this
         console.log(cOca)
         console.log(this.isCanada)
-        if (!self.isCanada) {
-          self.AllP = self.headersCorporate
-          console.log("changed p to c")
-
-        }
-        else {
+        
           self.AllP = self.headersCanada
           console.log("changed p to ca")
           this.isCanada2 = true;
 
-        }
+        
       },
       completeFn(results) {
         this.newData = results.data;
@@ -492,7 +488,7 @@
         // display selected sprints for selected increment
         // for each increment before display a collumn
         //
-       
+
 
 
 
@@ -519,17 +515,11 @@
             self.p26 = true
         })
         if (this.isCanada) {
-          // self.allStatus.forEach(element => {
-
-          // self.headersForBurnUp.forEach(el =>{
-
-          // })
-          // })
           count = 0
           self.allStatus.forEach(element => {
             console.log("in for each loop")
 
-            if (element[1] == "PI 1") {
+            if (element[1] == "PI_" + this.sprintIncrement) {
               this.AllData[1][1] += element[2]
 
             }
@@ -550,6 +540,9 @@
             }
             else if (element[1] == "PI_" + this.sprintIncrement + ".6") {
               this.AllData[1][7] += element[2]
+            }
+            else if (element[1] == "PI_" + this.sprintIncrement + ".7") {
+              this.AllData[1][8] += element[2]
             }
             if ((element[0] == "Closed") || (element[0] == "Done") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete") || (element[0] == "End to End Testing")) {
               if (element[1] == "PI 1") {
@@ -576,6 +569,9 @@
               else if (element[1] == "PI_" + this.sprintIncrement + ".6") {
                 this.AllData[2][7] += element[2]
               }
+              else if (element[1] == "PI_" + this.sprintIncrement + ".7") {
+                this.AllData[2][8] += element[2]
+              }
             }
             if ((element[0] == "Closed") || (element[0] == "Done") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete") || (element[0] == "QA Testing") || (element[0] == "Business Validation") || (element[0] == "End to End Testing")) {
               if (element[1] == "PI 1") {
@@ -600,101 +596,143 @@
               if (element[1] == "PI_" + this.sprintIncrement + ".6") {
                 this.AllData[3][7] += element[2]
               }
+              if (element[1] == "PI_" + this.sprintIncrement + ".7") {
+                this.AllData[3][8] += element[2]
+              }
             }
           });
-          
+
           this.AllData[1][2] += this.AllData[1][1]
           this.AllData[1][3] += this.AllData[1][2]
           this.AllData[1][4] += this.AllData[1][3]
           this.AllData[1][5] += this.AllData[1][4]
           this.AllData[1][6] += this.AllData[1][5]
           this.AllData[1][7] += this.AllData[1][6]
+          this.AllData[1][8] += this.AllData[1][7]
           this.AllData[2][2] += this.AllData[2][1]
           this.AllData[2][3] += this.AllData[2][2]
           this.AllData[2][4] += this.AllData[2][3]
           this.AllData[2][5] += this.AllData[2][4]
           this.AllData[2][6] += this.AllData[2][5]
           this.AllData[2][7] += this.AllData[2][6]
+          this.AllData[2][8] += this.AllData[2][7]
           this.AllData[3][2] += this.AllData[3][1]
           this.AllData[3][3] += this.AllData[3][2]
           this.AllData[3][4] += this.AllData[3][3]
           this.AllData[3][5] += this.AllData[3][4]
           this.AllData[3][6] += this.AllData[3][5]
           this.AllData[3][7] += this.AllData[3][6]
+          this.AllData[3][8] += this.AllData[3][7]
           this.AllData[0][1] = this.AllData[1][1]
         }
         else if (this.isCorporate) {
           self.allStatus.forEach(element => {
             console.log("in for each loop")
 
-            if (element[1] == "PI_" + this.sprintIncrement + ".1") {
+            if (element[1] == "PI_" + this.sprintIncrement) {
               this.AllData[1][1] += element[2]
+
             }
-            else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
+            else if (element[1] == "PI_" + this.sprintIncrement + ".1") {
               this.AllData[1][2] += element[2]
             }
-            else if (element[1] == "PI_" + this.sprintIncrement + ".3") {
+            else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
               this.AllData[1][3] += element[2]
             }
-            else if (element[1] == "PI_" + this.sprintIncrement + ".4") {
+            else if (element[1] == "PI_" + this.sprintIncrement + ".3") {
               this.AllData[1][4] += element[2]
             }
-            else if (element[1] == "PI_" + this.sprintIncrement + ".5") {
+            else if (element[1] == "PI_" + this.sprintIncrement + ".4") {
               this.AllData[1][5] += element[2]
+            }
+            else if (element[1] == "PI_" + this.sprintIncrement + ".5") {
+              this.AllData[1][6] += element[2]
+            }
+            else if (element[1] == "PI_" + this.sprintIncrement + ".6") {
+              this.AllData[1][7] += element[2]
+            }
+            else if (element[1] == "PI_" + this.sprintIncrement + ".7") {
+              this.AllData[1][8] += element[2]
             }
 
             if ((element[0] == "Done") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete") || (element[0] == "End to End Testing")) {
               //(element[0] == "Closed") || 
-              if (element[1] == "PI_2.1") {
+              if (element[1] == "PI_"+ this.sprintIncrement) {
                 this.AllData[2][1] += element[2]
-              }
-              else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
+              }if (element[1] == "PI_"+ this.sprintIncrement+".1") {
                 this.AllData[2][2] += element[2]
               }
-              else if (element[1] == "PI_" + this.sprintIncrement + ".3") {
+              else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
                 this.AllData[2][3] += element[2]
               }
-              else if (element[1] == "PI_" + this.sprintIncrement + ".4") {
+              else if (element[1] == "PI_" + this.sprintIncrement + ".3") {
                 this.AllData[2][4] += element[2]
               }
-              else if (element[1] == "PI_" + this.sprintIncrement + ".5") {
+              else if (element[1] == "PI_" + this.sprintIncrement + ".4") {
                 this.AllData[2][5] += element[2]
+              }
+              else if (element[1] == "PI_" + this.sprintIncrement + ".5") {
+                this.AllData[2][6] += element[2]
+              }
+              else if (element[1] == "PI_" + this.sprintIncrement + ".6") {
+                this.AllData[2][7] += element[2]
+              }
+              else if (element[1] == "PI_" + this.sprintIncrement + ".7") {
+                this.AllData[2][8] += element[2]
               }
 
             }
             if ((element[0] == "Closed") || (element[0] == "Done") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete") || (element[0] == "QA Testing") || (element[0] == "Business Validation") || (element[0] == "End to End Testing")) {
 
-              if (element[1] == "PI_" + this.sprintIncrement + ".1") {
+              if (element[1] == "PI_" + this.sprintIncrement) {
                 this.AllData[3][1] += element[2]
               }
-              else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
+              if (element[1] == "PI_" + this.sprintIncrement + ".1") {
                 this.AllData[3][2] += element[2]
               }
-              else if (element[1] == "PI_" + this.sprintIncrement + ".3") {
+              else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
                 this.AllData[3][3] += element[2]
               }
-              else if (element[1] == "PI_" + this.sprintIncrement + ".4") {
+              else if (element[1] == "PI_" + this.sprintIncrement + ".3") {
                 this.AllData[3][4] += element[2]
               }
-              else if (element[1] == "PI_" + this.sprintIncrement + ".5") {
+              else if (element[1] == "PI_" + this.sprintIncrement + ".4") {
                 this.AllData[3][5] += element[2]
+              }
+              else if (element[1] == "PI_" + this.sprintIncrement + ".5") {
+                this.AllData[3][6] += element[2]
+              }
+              else if (element[1] == "PI_" + this.sprintIncrement + ".6") {
+                this.AllData[3][7] += element[2]
+              }
+              else if (element[1] == "PI_" + this.sprintIncrement + ".7") {
+                this.AllData[3][8] += element[2]
               }
 
             }
           });
-          
+
           this.AllData[1][2] += this.AllData[1][1]
           this.AllData[1][3] += this.AllData[1][2]
           this.AllData[1][4] += this.AllData[1][3]
           this.AllData[1][5] += this.AllData[1][4]
+          this.AllData[1][6] += this.AllData[1][5]
+          this.AllData[1][7] += this.AllData[1][6]
+          this.AllData[1][8] += this.AllData[1][7]
           this.AllData[2][2] += this.AllData[2][1]
           this.AllData[2][3] += this.AllData[2][2]
           this.AllData[2][4] += this.AllData[2][3]
           this.AllData[2][5] += this.AllData[2][4]
+          this.AllData[2][6] += this.AllData[2][5]
+          this.AllData[2][7] += this.AllData[2][6]
+          this.AllData[2][8] += this.AllData[2][7]
           this.AllData[3][2] += this.AllData[3][1]
           this.AllData[3][3] += this.AllData[3][2]
           this.AllData[3][4] += this.AllData[3][3]
           this.AllData[3][5] += this.AllData[3][4]
+          this.AllData[3][6] += this.AllData[3][5]
+          this.AllData[3][7] += this.AllData[3][6]
+          this.AllData[3][8] += this.AllData[3][7]
 
 
 
@@ -704,74 +742,110 @@
           self.allStatus.forEach(element => {
             console.log("in for each loop")
 
-            if (element[1] == "PI_2.1") {
+            if (element[1] == "PI_" + this.sprintIncrement) {
               this.AllData[1][1] += element[2]
             }
-            else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
+            else if (element[1] == "PI_" + this.sprintIncrement + ".1") {
               this.AllData[1][2] += element[2]
             }
-            else if (element[1] == "PI_" + this.sprintIncrement + ".3") {
+            else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
               this.AllData[1][3] += element[2]
             }
-            else if (element[1] == "PI_" + this.sprintIncrement + ".4") {
+            else if (element[1] == "PI_" + this.sprintIncrement + ".3") {
               this.AllData[1][4] += element[2]
             }
-            else if (element[1] == "PI_" + this.sprintIncrement + ".5") {
+            else if (element[1] == "PI_" + this.sprintIncrement + ".4") {
               this.AllData[1][5] += element[2]
+            }
+            else if (element[1] == "PI_" + this.sprintIncrement + ".5") {
+              this.AllData[1][6] += element[2]
+            }
+            else if (element[1] == "PI_" + this.sprintIncrement + ".6") {
+              this.AllData[1][7] += element[2]
+            }
+            else if (element[1] == "PI_" + this.sprintIncrement + ".7") {
+              this.AllData[1][8] += element[2]
             }
 
             if ((element[0] == "Done") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete") || (element[0] == "End to End Testing")) {
               //(element[0] == "Closed") || 
-              if (element[1] == "PI_" + this.sprintIncrement + ".1") {
+              if (element[1] == "PI_" + this.sprintIncrement) {
                 this.AllData[2][1] += element[2]
               }
-              else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
+              else if (element[1] == "PI_" + this.sprintIncrement + ".1") {
                 this.AllData[2][2] += element[2]
               }
-              else if (element[1] == "PI_" + this.sprintIncrement + ".3") {
+              else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
                 this.AllData[2][3] += element[2]
               }
-              else if (element[1] == "PI_" + this.sprintIncrement + ".4") {
+              else if (element[1] == "PI_" + this.sprintIncrement + ".3") {
                 this.AllData[2][4] += element[2]
               }
-              else if (element[1] == "PI_" + this.sprintIncrement + ".5") {
+              else if (element[1] == "PI_" + this.sprintIncrement + ".4") {
                 this.AllData[2][5] += element[2]
+              }
+              else if (element[1] == "PI_" + this.sprintIncrement + ".5") {
+                this.AllData[2][6] += element[2]
+              }
+              else if (element[1] == "PI_" + this.sprintIncrement + ".6") {
+                this.AllData[2][7] += element[2]
+              }
+              else if (element[1] == "PI_" + this.sprintIncrement + ".7") {
+                this.AllData[2][8] += element[2]
               }
 
             }
             if ((element[0] == "Closed") || (element[0] == "Done") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete") || (element[0] == "QA Testing") || (element[0] == "Business Validation") || (element[0] == "End to End Testing")) {
 
-              if (element[1] == "PI_" + this.sprintIncrement + ".1") {
+              if (element[1] == "PI_" + this.sprintIncrement) {
                 this.AllData[3][1] += element[2]
               }
-              else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
-                this.AllData[3][2] += element[2]
-              }
-              else if (element[1] == "PI_" + this.sprintIncrement + ".3") {
-                this.AllData[3][3] += element[2]
-              }
-              else if (element[1] == "PI_" + this.sprintIncrement + ".4") {
-                this.AllData[3][4] += element[2]
-              }
-              else if (element[1] == "PI_" + this.sprintIncrement + ".5") {
-                this.AllData[3][5] += element[2]
-              }
+              else if (element[1] == "PI_" + this.sprintIncrement + ".1") {
+                  this.AllData[3][2] += element[2]
+                }
+                else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
+                  this.AllData[3][3] += element[2]
+                }
+                else if (element[1] == "PI_" + this.sprintIncrement + ".3") {
+                  this.AllData[3][4] += element[2]
+                }
+                else if (element[1] == "PI_" + this.sprintIncrement + ".4") {
+                  this.AllData[3][5] += element[2]
+                }
+                else if (element[1] == "PI_" + this.sprintIncrement + ".5") {
+                  this.AllData[3][6] += element[2]
+                }
+                else if (element[1] == "PI_" + this.sprintIncrement + ".6") {
+                  this.AllData[3][7] += element[2]
+                }
+                else if (element[1] == "PI_" + this.sprintIncrement + ".7") {
+                  this.AllData[3][8] += element[2]
+                }
 
             }
           });
-          
+
           this.AllData[1][2] += this.AllData[1][1]
           this.AllData[1][3] += this.AllData[1][2]
           this.AllData[1][4] += this.AllData[1][3]
           this.AllData[1][5] += this.AllData[1][4]
+          this.AllData[1][6] += this.AllData[1][5]
+          this.AllData[1][7] += this.AllData[1][6]
+          this.AllData[1][8] += this.AllData[1][7]
           this.AllData[2][2] += this.AllData[2][1]
           this.AllData[2][3] += this.AllData[2][2]
           this.AllData[2][4] += this.AllData[2][3]
           this.AllData[2][5] += this.AllData[2][4]
+          this.AllData[2][6] += this.AllData[2][5]
+          this.AllData[2][7] += this.AllData[2][6]
+          this.AllData[2][8] += this.AllData[2][7]
           this.AllData[3][2] += this.AllData[3][1]
           this.AllData[3][3] += this.AllData[3][2]
           this.AllData[3][4] += this.AllData[3][3]
           this.AllData[3][5] += this.AllData[3][4]
+          this.AllData[3][6] += this.AllData[3][5]
+          this.AllData[3][7] += this.AllData[3][6]
+          this.AllData[3][8] += this.AllData[3][7]
           countT = 0;
           self.AllDataCategoriesTax.forEach(z => {
 
@@ -780,57 +854,84 @@
             self.allStatus.forEach(element => {
 
               if (element[3] == z[0]) {
-                if (element[1] == "PI_" + this.sprintIncrement + ".1") {
+                if (element[1] == "PI_" + this.sprintIncrement) {
                   AllC[1][1] += element[2]
                 }
-                else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
+                else if (element[1] == "PI_" + this.sprintIncrement + ".1") {
                   AllC[1][2] += element[2]
                 }
-                else if (element[1] == "PI_" + this.sprintIncrement + ".3") {
+                else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
                   AllC[1][3] += element[2]
                 }
-                else if (element[1] == "PI_" + this.sprintIncrement + ".4") {
+                else if (element[1] == "PI_" + this.sprintIncrement + ".3") {
                   AllC[1][4] += element[2]
                 }
-                else if (element[1] == "PI_" + this.sprintIncrement + ".5") {
+                else if (element[1] == "PI_" + this.sprintIncrement + ".4") {
                   AllC[1][5] += element[2]
+                }
+                else if (element[1] == "PI_" + this.sprintIncrement + ".5") {
+                  AllC[1][6] += element[2]
+                }
+                else if (element[1] == "PI_" + this.sprintIncrement + ".6") {
+                  AllC[1][7] += element[2]
+                }
+                else if (element[1] == "PI_" + this.sprintIncrement + ".7") {
+                  AllC[1][8] += element[2]
                 }
 
                 if ((element[0] == "Done") || (element[0] == "Closed") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete") || (element[0] == "End to End Testing")) {
                   //(element[0] == "Closed") || 
-                  if (element[1] == "PI_" + this.sprintIncrement + ".1") {
+                  if (element[1] == "PI_" + this.sprintIncrement) {
                     AllC[2][1] += element[2]
                   }
-                  else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
+                  else if (element[1] == "PI_" + this.sprintIncrement + ".1") {
                     AllC[2][2] += element[2]
                   }
-                  else if (element[1] == "PI_" + this.sprintIncrement + ".3") {
+                  else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
                     AllC[2][3] += element[2]
                   }
-                  else if (element[1] == "PI_" + this.sprintIncrement + ".4") {
+                  else if (element[1] == "PI_" + this.sprintIncrement + ".3") {
                     AllC[2][4] += element[2]
                   }
-                  else if (element[1] == "PI_" + this.sprintIncrement + ".5") {
+                  else if (element[1] == "PI_" + this.sprintIncrement + ".4") {
                     AllC[2][5] += element[2]
+                  }
+                  else if (element[1] == "PI_" + this.sprintIncrement + ".5") {
+                    AllC[2][6] += element[2]
+                  }
+                  else if (element[1] == "PI_" + this.sprintIncrement + ".6") {
+                    AllC[2][7] += element[2]
+                  }
+                  else if (element[1] == "PI_" + this.sprintIncrement + ".7") {
+                    AllC[2][8] += element[2]
                   }
 
                 }
                 if ((element[0] == "Closed") || (element[0] == "Done") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete") || (element[0] == "QA Testing") || (element[0] == "Business Validation") || (element[0] == "End to End Testing")) {
 
-                  if (element[1] == "PI_" + this.sprintIncrement + ".1") {
+                  if (element[1] == "PI_" + this.sprintIncrement) {
                     AllC[3][1] += element[2]
                   }
-                  else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
+                  else if (element[1] == "PI_" + this.sprintIncrement + ".1") {
                     AllC[3][2] += element[2]
                   }
-                  else if (element[1] == "PI_" + this.sprintIncrement + ".3") {
+                  else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
                     AllC[3][3] += element[2]
                   }
-                  else if (element[1] == "PI_" + this.sprintIncrement + ".4") {
+                  else if (element[1] == "PI_" + this.sprintIncrement + ".3") {
                     AllC[3][4] += element[2]
                   }
-                  else if (element[1] == "PI_" + this.sprintIncrement + ".5") {
+                  else if (element[1] == "PI_" + this.sprintIncrement + ".4") {
                     AllC[3][5] += element[2]
+                  }
+                  else if (element[1] == "PI_" + this.sprintIncrement + ".5") {
+                    AllC[3][6] += element[2]
+                  }
+                  else if (element[1] == "PI_" + this.sprintIncrement + ".6") {
+                    AllC[3][7] += element[2]
+                  }
+                  else if (element[1] == "PI_" + this.sprintIncrement + ".7") {
+                    AllC[3][8] += element[2]
                   }
 
                 }
@@ -841,25 +942,37 @@
 
 
             });
-            
+
 
             AllC[1][2] += AllC[1][1]
             AllC[1][3] += AllC[1][2]
             AllC[1][4] += AllC[1][3]
             AllC[1][5] += AllC[1][4]
+            AllC[1][6] += AllC[1][5]
+            AllC[1][7] += AllC[1][6]
+            AllC[1][8] += AllC[1][7]
             AllC[2][2] += AllC[2][1]
             AllC[2][3] += AllC[2][2]
             AllC[2][4] += AllC[2][3]
             AllC[2][5] += AllC[2][4]
+            AllC[2][6] += AllC[2][5]
+            AllC[2][7] += AllC[2][6]
+            AllC[2][8] += AllC[2][7]
             AllC[3][2] += AllC[3][1]
             AllC[3][3] += AllC[3][2]
             AllC[3][4] += AllC[3][3]
             AllC[3][5] += AllC[3][4]
+            AllC[3][6] += AllC[3][5]
+            AllC[3][7] += AllC[3][6]
+            AllC[3][8] += AllC[3][7]
             AllC[0][1] = AllC[1][5]
             AllC[0][2] = AllC[1][5]
             AllC[0][3] = AllC[1][5]
             AllC[0][4] = AllC[1][5]
             AllC[0][5] = AllC[1][5]
+            AllC[0][6] = AllC[1][5]
+            AllC[0][7] = AllC[1][5]
+            AllC[0][8] = AllC[1][5]
             // AllC[0][1] = AllC[1][5]
             this.AllDataCategoriesTax[countT].push(AllC);
             countT++
@@ -869,7 +982,7 @@
         }
 
 
-    
+
 
 
         self.headersForBurnUp.unshift("Category");
