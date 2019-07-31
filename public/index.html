@@ -105,22 +105,28 @@
                 {{rowData[11]}}
               </td>
               <td v-if="p21">
-                {{!isCanada2 ? rowData[1] : rowData[2]}}
+                {{rowData[2]}}
               </td>
               <td v-if="p22">
-                {{!isCanada2 ? rowData[2] : rowData[3]}}
+                {{rowData[3]}}
               </td>
               <td v-if="p23">
-                {{!isCanada2 ? rowData[3] : rowData[4]}}
+                {{rowData[4]}}
               </td>
               <td v-if="p24">
-                {{!isCanada2 ? rowData[4] : rowData[5]}}
+                {{rowData[5]}}
               </td>
               <td v-if="p25">
-                {{!isCanada2 ? rowData[5] : rowData[6]}}
+                {{rowData[6]}}
               </td>
               <td v-if="p26">
                 {{rowData[7]}}
+              </td>
+              <td v-if="p26">
+                {{rowData[8]}}
+              </td>
+              <td v-if="p26">
+                {{rowData[9]}}
               </td>
 
             </tr>
@@ -152,32 +158,30 @@
                 <td v-if="p1">
                   {{rowData[1]}}
                 </td>
-                <!-- <td v-if="p12">
-                  {{rowData[9]}}
-                </td> -->
-                <!-- <td v-if="p13">
-                  {{rowData[10]}}
-                </td>
-                <td v-if="p14">
-                  {{rowData[11]}}
-                </td> -->
+                
                 <td v-if="p21">
-                  {{!isCanada ? rowData[1] : rowData[2]}}
+                  {{rowData[2]}}
                 </td>
                 <td v-if="p22">
-                  {{!isCanada ? rowData[2] : rowData[3]}}
+                  {{rowData[3]}}
                 </td>
                 <td v-if="p23">
-                  {{!isCanada ? rowData[3] : rowData[4]}}
+                  {{rowData[4]}}
                 </td>
                 <td v-if="p24">
-                  {{!isCanada ? rowData[4] : rowData[5]}}
+                  {{rowData[5]}}
                 </td>
                 <td v-if="p25">
-                  {{!isCanada ? rowData[5] : rowData[6]}}
+                  {{rowData[6]}}
                 </td>
                 <td v-if="p26">
                   {{rowData[7]}}
+                </td>
+                <td v-if="p26">
+                  {{rowData[8]}}
+                </td>
+                <td v-if="p26">
+                  {{rowData[9]}}
                 </td>
 
               </tr>
@@ -283,8 +287,8 @@
         this.isSprintSelected = true;
         this.isStarted = true;
 
-        this.headersCanada = [ "PI_" + this.sprintIncrement, "PI_" + this.sprintIncrement + ".1", "PI_" + this.sprintIncrement + ".2", "PI_" + this.sprintIncrement + ".3", "PI_" + this.sprintIncrement + ".4", "PI_" + this.sprintIncrement + ".5", "PI_" + this.sprintIncrement + ".6", "PI_" + this.sprintIncrement + ".7"]
-        this.headersCorporate = ["PI_" + this.sprintIncrement,"PI_" + this.sprintIncrement + ".1", "PI_" + this.sprintIncrement + ".2", "PI_" + this.sprintIncrement + ".3", "PI_" + this.sprintIncrement + ".4", "PI_" + this.sprintIncrement + ".5", "PI_" + this.sprintIncrement + ".6", "PI_" + this.sprintIncrement + ".7"]
+        this.headersCanada = ["PI_" + this.sprintIncrement, "PI_" + this.sprintIncrement + ".1", "PI_" + this.sprintIncrement + ".2", "PI_" + this.sprintIncrement + ".3", "PI_" + this.sprintIncrement + ".4", "PI_" + this.sprintIncrement + ".5", "PI_" + this.sprintIncrement + ".6", "PI_" + this.sprintIncrement + ".7"]
+        this.headersCorporate = ["PI_" + this.sprintIncrement, "PI_" + this.sprintIncrement + ".1", "PI_" + this.sprintIncrement + ".2", "PI_" + this.sprintIncrement + ".3", "PI_" + this.sprintIncrement + ".4", "PI_" + this.sprintIncrement + ".5", "PI_" + this.sprintIncrement + ".6", "PI_" + this.sprintIncrement + ".7"]
 
 
         this.isContinueClicked = false
@@ -294,12 +298,12 @@
         self = this
         console.log(cOca)
         console.log(this.isCanada)
-        
-          self.AllP = self.headersCanada
-          console.log("changed p to ca")
-          this.isCanada2 = true;
 
-        
+        self.AllP = self.headersCanada
+        console.log("changed p to ca")
+        this.isCanada2 = true;
+
+
       },
       completeFn(results) {
         this.newData = results.data;
@@ -657,9 +661,9 @@
 
             if ((element[0] == "Done") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete") || (element[0] == "End to End Testing")) {
               //(element[0] == "Closed") || 
-              if (element[1] == "PI_"+ this.sprintIncrement) {
+              if (element[1] == "PI_" + this.sprintIncrement) {
                 this.AllData[2][1] += element[2]
-              }if (element[1] == "PI_"+ this.sprintIncrement+".1") {
+              } if (element[1] == "PI_" + this.sprintIncrement + ".1") {
                 this.AllData[2][2] += element[2]
               }
               else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
@@ -801,26 +805,26 @@
                 this.AllData[3][1] += element[2]
               }
               else if (element[1] == "PI_" + this.sprintIncrement + ".1") {
-                  this.AllData[3][2] += element[2]
-                }
-                else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
-                  this.AllData[3][3] += element[2]
-                }
-                else if (element[1] == "PI_" + this.sprintIncrement + ".3") {
-                  this.AllData[3][4] += element[2]
-                }
-                else if (element[1] == "PI_" + this.sprintIncrement + ".4") {
-                  this.AllData[3][5] += element[2]
-                }
-                else if (element[1] == "PI_" + this.sprintIncrement + ".5") {
-                  this.AllData[3][6] += element[2]
-                }
-                else if (element[1] == "PI_" + this.sprintIncrement + ".6") {
-                  this.AllData[3][7] += element[2]
-                }
-                else if (element[1] == "PI_" + this.sprintIncrement + ".7") {
-                  this.AllData[3][8] += element[2]
-                }
+                this.AllData[3][2] += element[2]
+              }
+              else if (element[1] == "PI_" + this.sprintIncrement + ".2") {
+                this.AllData[3][3] += element[2]
+              }
+              else if (element[1] == "PI_" + this.sprintIncrement + ".3") {
+                this.AllData[3][4] += element[2]
+              }
+              else if (element[1] == "PI_" + this.sprintIncrement + ".4") {
+                this.AllData[3][5] += element[2]
+              }
+              else if (element[1] == "PI_" + this.sprintIncrement + ".5") {
+                this.AllData[3][6] += element[2]
+              }
+              else if (element[1] == "PI_" + this.sprintIncrement + ".6") {
+                this.AllData[3][7] += element[2]
+              }
+              else if (element[1] == "PI_" + this.sprintIncrement + ".7") {
+                this.AllData[3][8] += element[2]
+              }
 
             }
           });
