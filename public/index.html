@@ -217,7 +217,7 @@
         countAllStatus: 0,
         headersCanada: ["PI_1", "PI_2.1", "PI_2.2", "PI_2.3", "PI_2.4", "PI_2.5", "PI_2.6"],
         headersCorporate: ["PI_2.1", "PI_2.2", "PI_2.3", "PI_2.4", "PI_2.5"],
-        AllP: ["PI_1", "PI_2.1", "PI_2.2", "PI_2.3", "PI_2.4", "PI_2.5", "PI_2.6", "PI_2.6"],
+        AllP: ["PI_1", "PI_2.1", "PI_2.2", "PI_2.3", "PI_2.4", "PI_2.5", "PI_2.6", "PI_2.7"],
         headersForBurnUp: [],
         taxCategoryHeader: ["EBS-TRTA Lead to Support (L2S)", "DEP - Billing, Payment, Credit, Collections & Disputes",
           "DEP - Order & Fulfillment", "DEP - Order Capture", "DEP - Sales & Marketing", "DEP - Service & Support"],
@@ -485,7 +485,7 @@
 
 
         self.headersForBurnUp.forEach(element => {
-          if (element == "PI " + self.sprintIncrement)
+          if (element == "PI_" + self.sprintIncrement)
             self.p1 = true
           if (element == "PI_2")
             self.p12 = true
