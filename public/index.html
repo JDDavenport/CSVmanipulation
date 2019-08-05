@@ -95,15 +95,6 @@
               <td v-if="p1">
                 {{rowData[1]}}
               </td>
-              <!-- <td v-if="p12">
-                {{rowData[9]}}
-              </td>
-              <td v-if="p13">
-                {{rowData[10]}}
-              </td> -->
-              <td v-if="p14">
-                {{rowData[11]}}
-              </td>
               <td v-if="p21">
                 {{rowData[2]}}
               </td>
@@ -122,12 +113,10 @@
               <td v-if="p26">
                 {{rowData[7]}}
               </td>
-              <td v-if="p26">
+              <td v-if="p27">
                 {{rowData[8]}}
               </td>
-              <td v-if="p26">
-                {{rowData[9]}}
-              </td>
+
 
             </tr>
           </table>
@@ -158,7 +147,7 @@
                 <td v-if="p1">
                   {{rowData[1]}}
                 </td>
-                
+
                 <td v-if="p21">
                   {{rowData[2]}}
                 </td>
@@ -177,12 +166,10 @@
                 <td v-if="p26">
                   {{rowData[7]}}
                 </td>
-                <td v-if="p26">
+                <td v-if="p27">
                   {{rowData[8]}}
                 </td>
-                <td v-if="p26">
-                  {{rowData[9]}}
-                </td>
+
 
               </tr>
             </table>
@@ -230,7 +217,7 @@
         countAllStatus: 0,
         headersCanada: ["PI_1", "PI_2.1", "PI_2.2", "PI_2.3", "PI_2.4", "PI_2.5", "PI_2.6"],
         headersCorporate: ["PI_2.1", "PI_2.2", "PI_2.3", "PI_2.4", "PI_2.5"],
-        AllP: ["PI_1", "PI_2.1", "PI_2.2", "PI_2.3", "PI_2.4", "PI_2.5", "PI_2.6"],
+        AllP: ["PI_1", "PI_2.1", "PI_2.2", "PI_2.3", "PI_2.4", "PI_2.5", "PI_2.6", "PI_2.6"],
         headersForBurnUp: [],
         taxCategoryHeader: ["EBS-TRTA Lead to Support (L2S)", "DEP - Billing, Payment, Credit, Collections & Disputes",
           "DEP - Order & Fulfillment", "DEP - Order Capture", "DEP - Sales & Marketing", "DEP - Service & Support"],
@@ -246,6 +233,7 @@
         p24: false,
         p25: false,
         p26: false,
+        p27: false,
         finished: true,
         isTax: false,
         projectIndex: 0,
@@ -497,7 +485,7 @@
 
 
         self.headersForBurnUp.forEach(element => {
-          if (element == "PI_1")
+          if (element == "PI " + self.sprintIncrement)
             self.p1 = true
           if (element == "PI_2")
             self.p12 = true
@@ -517,13 +505,15 @@
             self.p25 = true
           if (element == "PI_" + self.sprintIncrement + ".6")
             self.p26 = true
+          if (element == "PI_" + self.sprintIncrement + ".7")
+            self.p27 = true
         })
         if (this.isCanada) {
           count = 0
           self.allStatus.forEach(element => {
             console.log("in for each loop")
 
-            if (element[1] == "PI_" + this.sprintIncrement) {
+            if (element[1] == "PI " + this.sprintIncrement) {
               this.AllData[1][1] += element[2]
 
             }
@@ -549,7 +539,7 @@
               this.AllData[1][8] += element[2]
             }
             if ((element[0] == "Closed") || (element[0] == "Done") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete") || (element[0] == "End to End Testing")) {
-              if (element[1] == "PI 1") {
+              if (element[1] == "PI " + this.sprintIncrement) {
                 this.AllData[2][1] += element[2]
 
               }
@@ -578,7 +568,7 @@
               }
             }
             if ((element[0] == "Closed") || (element[0] == "Done") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete") || (element[0] == "QA Testing") || (element[0] == "Business Validation") || (element[0] == "End to End Testing")) {
-              if (element[1] == "PI 1") {
+              if (element[1] == "PI " + this.sprintIncrement) {
                 this.AllData[3][1] += element[2]
 
               }
@@ -633,7 +623,7 @@
           self.allStatus.forEach(element => {
             console.log("in for each loop")
 
-            if (element[1] == "PI_" + this.sprintIncrement) {
+            if (element[1] == "PI " + this.sprintIncrement) {
               this.AllData[1][1] += element[2]
 
             }
@@ -661,7 +651,7 @@
 
             if ((element[0] == "Done") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete") || (element[0] == "End to End Testing")) {
               //(element[0] == "Closed") || 
-              if (element[1] == "PI_" + this.sprintIncrement) {
+              if (element[1] == "PI " + this.sprintIncrement) {
                 this.AllData[2][1] += element[2]
               } if (element[1] == "PI_" + this.sprintIncrement + ".1") {
                 this.AllData[2][2] += element[2]
@@ -688,7 +678,7 @@
             }
             if ((element[0] == "Closed") || (element[0] == "Done") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete") || (element[0] == "QA Testing") || (element[0] == "Business Validation") || (element[0] == "End to End Testing")) {
 
-              if (element[1] == "PI_" + this.sprintIncrement) {
+              if (element[1] == "PI " + this.sprintIncrement) {
                 this.AllData[3][1] += element[2]
               }
               if (element[1] == "PI_" + this.sprintIncrement + ".1") {
@@ -746,7 +736,7 @@
           self.allStatus.forEach(element => {
             console.log("in for each loop")
 
-            if (element[1] == "PI_" + this.sprintIncrement) {
+            if (element[1] == "PI " + this.sprintIncrement) {
               this.AllData[1][1] += element[2]
             }
             else if (element[1] == "PI_" + this.sprintIncrement + ".1") {
@@ -773,7 +763,7 @@
 
             if ((element[0] == "Done") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete") || (element[0] == "End to End Testing")) {
               //(element[0] == "Closed") || 
-              if (element[1] == "PI_" + this.sprintIncrement) {
+              if (element[1] == "PI " + this.sprintIncrement) {
                 this.AllData[2][1] += element[2]
               }
               else if (element[1] == "PI_" + this.sprintIncrement + ".1") {
@@ -801,7 +791,7 @@
             }
             if ((element[0] == "Closed") || (element[0] == "Done") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete") || (element[0] == "QA Testing") || (element[0] == "Business Validation") || (element[0] == "End to End Testing")) {
 
-              if (element[1] == "PI_" + this.sprintIncrement) {
+              if (element[1] == "PI " + this.sprintIncrement) {
                 this.AllData[3][1] += element[2]
               }
               else if (element[1] == "PI_" + this.sprintIncrement + ".1") {
@@ -858,7 +848,7 @@
             self.allStatus.forEach(element => {
 
               if (element[3] == z[0]) {
-                if (element[1] == "PI_" + this.sprintIncrement) {
+                if (element[1] == "PI " + this.sprintIncrement) {
                   AllC[1][1] += element[2]
                 }
                 else if (element[1] == "PI_" + this.sprintIncrement + ".1") {
@@ -885,7 +875,7 @@
 
                 if ((element[0] == "Done") || (element[0] == "Closed") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete") || (element[0] == "End to End Testing")) {
                   //(element[0] == "Closed") || 
-                  if (element[1] == "PI_" + this.sprintIncrement) {
+                  if (element[1] == "PI " + this.sprintIncrement) {
                     AllC[2][1] += element[2]
                   }
                   else if (element[1] == "PI_" + this.sprintIncrement + ".1") {
@@ -913,7 +903,7 @@
                 }
                 if ((element[0] == "Closed") || (element[0] == "Done") || (element[0] == "Ready for Deployment") || (element[0] == "Sprint Complete") || (element[0] == "QA Testing") || (element[0] == "Business Validation") || (element[0] == "End to End Testing")) {
 
-                  if (element[1] == "PI_" + this.sprintIncrement) {
+                  if (element[1] == "PI " + this.sprintIncrement) {
                     AllC[3][1] += element[2]
                   }
                   else if (element[1] == "PI_" + this.sprintIncrement + ".1") {
